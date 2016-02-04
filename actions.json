@@ -1,0 +1,5 @@
+{
+	"commands": [
+		{ "name":"Add dots", "key":"q", "module":"hotkey_text_changer", "command":"string_function" }
+	]
+}
