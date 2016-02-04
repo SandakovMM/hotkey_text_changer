@@ -30,13 +30,13 @@ class FunctionLoader:
 
 	def find_module(self, module_name):
 		for module in self.addition_modules:
-			if module.__name__ == module_name
+			if module.__name__ == module_name:
 				return module
 		return None
 
 	# There we need to load function from module and return this function
 	def load_command(self, module, command):
-		m = find_module(module)		
+		m = self.find_module(module)		
 		if m == None:
 			m = __import__(module)
 			self.addition_modules.append(m)
