@@ -14,17 +14,14 @@ class MainWindow:
 	def __init__(self):
 		self.root = Tk()
 		self.count = 0
+
 		listbox = Listbox(self.root)
 		listbox.pack()
 
-		# Check how it's look like
-		listbox.insert(END, "create hint - q")
-		listbox.insert(END, "fix if - f")
-		listbox.insert(END, "somethig if - s")
+		listbox.insert(END, "make some - q")
 
 		# init hotkeys 
 		self.root.bind_all("<q>", self.hotkey_reaction)
-
 		self.root.mainloop()
 
 	def hotkey_reaction(self, event):
@@ -48,6 +45,7 @@ class Hint(Toplevel):
 	'''A toplevel widget with the ability to fade in'''
 	def __init__(self, *args, **kwargs):
 		Toplevel.__init__(self, *args, **kwargs)
+		self.geometry("500x50+780+30")
 		self.attributes("-alpha", 0.0)
 		self.hint_textbox = Text(self)
 		self.hint_textbox.pack()
