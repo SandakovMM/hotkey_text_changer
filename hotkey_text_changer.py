@@ -7,13 +7,15 @@ import function_loader
 class MainWindow:
 	def __init__(self):
 		self.root = Tk()
+		self.root.geometry("100x500+900+200")
 		self.count = 0
 		self.func_loader = function_loader.FunctionLoader()
 
-		listbox = Listbox(self.root)
-		listbox.pack()
+		self.listbox = Listbox(self.root)
+		self.listbox.pack()
 
-		listbox.insert(END, "make some - q")
+		# Need add to list exacly what we get from json
+		self.listbox.insert(END, "make some - q")
 
 		# init hotkeys 
 		self.root.bind_all("<q>", self.hotkey_reaction)
@@ -21,7 +23,7 @@ class MainWindow:
 
 	def hotkey_reaction(self, event):
 		result_str = ''
-		try:
+		try:			
 			geted_str  = self.root.clipboard_get()	
 			function = self.func_loader.find_command_by_key(event.char)
 			result_str = function(geted_str)
@@ -41,8 +43,11 @@ class Hint(Toplevel):
 	'''A toplevel widget with the ability to fade in'''
 	def __init__(self, *args, **kwargs):
 		Toplevel.__init__(self, *args, **kwargs)
+
+		# need to choose place depending on monitor sizes
 		self.geometry("500x50+780+30")
 		self.attributes("-alpha", 0.0)
+		self.overrideredirect(1)
 		self.hint_textbox = Text(self)
 		self.hint_textbox.pack()
 
