@@ -53,3 +53,10 @@ class FunctionLoader:
 		for command in self.all_commands:
 			result.append(command.name + ' - ' + command.key)
 		return result
+
+	# This function used to get all hotkeys, what we can use.
+	def get_all_hotkeys(self):
+		result = []
+		for command in self.all_commands:
+			result.append(command.key)
+		return result

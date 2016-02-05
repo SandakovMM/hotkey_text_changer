@@ -17,8 +17,10 @@ class MainWindow:
 		for data_string in self.func_loader.get_commands_visable_data():
 			self.listbox.insert(END, data_string)
 
-		# init hotkeys 
-		self.root.bind_all("<q>", self.hotkey_reaction)
+		# init hotkeys
+		for key in self.func_loader.get_all_hotkeys():
+			self.root.bind_all("<" + key + ">", self.hotkey_reaction)
+
 		self.root.mainloop()
 
 	def hotkey_reaction(self, event):
