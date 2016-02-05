@@ -34,6 +34,10 @@ class MainWindow:
 		except:
 			result_str = 'Nothing to show!'
 		self.create_hint(result_str)
+		# We want to quit programm when work is done. Don't really shure thats
+		#  leave it here or not. Problem is - after end of work clipboard make clear
+		#  and we can't use changed string.
+		#self.root.after(6000, self.root.destroy)
 
 	def create_hint(self, out_str):
 		hint_to_show = Hint(self.root)

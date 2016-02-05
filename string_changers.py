@@ -10,8 +10,8 @@ def string_add_dots(string_in):
 	return result_string
 
 def string_from_eng_to_ru(string_in):
-	eng_str=u'qwertyuiop[]asdfghjkl;\'zxcvbnm,.~'
-	ru_str =u'йцукенгшщзхъфывапролджэячсмитьбюё'
+	eng_str=u'qwertyuiop[]asdfghjkl;\'zxcvbnm,./`QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>~'
+	ru_str =u'йцукенгшщзхъфывапролджэячсмитьбю.ёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ'
 	result_string = ''
 
 	for char_in in string_in:
@@ -24,8 +24,8 @@ def string_from_eng_to_ru(string_in):
 	return result_string
 
 def string_from_ru_to_eng(string_in):
-	eng_str=u'qwertyuiop[]asdfghjkl;\'zxcvbnm,.~'
-	ru_str =u'йцукенгшщзхъфывапролджэячсмитьбюё'
+	eng_str=u'qwertyuiop[]asdfghjkl;\'zxcvbnm,./`QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>~'
+	ru_str =u'йцукенгшщзхъфывапролджэячсмитьбю.ёЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ'
 	result_string = ''
 
 	for char_in in string_in:
