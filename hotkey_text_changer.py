@@ -7,7 +7,7 @@ import function_loader
 class MainWindow:
 	def __init__(self):
 		self.root = Tk()
-		self.root.geometry("100x500+900+200")
+		self.root.geometry("130x500+900+200")
 		self.count = 0
 		self.func_loader = function_loader.FunctionLoader()
 
