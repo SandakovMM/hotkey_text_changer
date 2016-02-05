@@ -4,13 +4,6 @@
 from Tkinter import *
 import function_loader
 
-# There is a test string function
-def string_function(string_in):
-	result_string = ''
-	for char_in in string_in:
-		result_string = result_string + char_in + '.'
-	return result_string
-
 class MainWindow:
 	def __init__(self):
 		self.root = Tk()
