@@ -11,11 +11,11 @@ class MainWindow:
 		self.count = 0
 		self.func_loader = function_loader.FunctionLoader()
 
+		# Add listbox for user. TODO: set size of listbox to fill full window
 		self.listbox = Listbox(self.root)
 		self.listbox.pack()
-
-		# Need add to list exacly what we get from json
-		self.listbox.insert(END, "make some - q")
+		for data_string in self.func_loader.get_commands_visable_data():
+			self.listbox.insert(END, data_string)
 
 		# init hotkeys 
 		self.root.bind_all("<q>", self.hotkey_reaction)

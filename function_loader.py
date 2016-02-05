@@ -45,3 +45,11 @@ class FunctionLoader:
 			m = __import__(module)
 			self.addition_modules.append(m)
 		return getattr(m, command)
+
+	# This function used to return all commands visable data (names and keys)
+	#  to show this data in our user intarface. Returns list of strings [name - key].
+	def get_commands_visable_data(self):
+		result = []
+		for command in self.all_commands:
+			result.append(command.name + ' - ' + command.key)
+		return result
