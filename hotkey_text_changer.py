@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from Tkinter import *
+import function_loader
 
 # There is a test string function
 def string_function(string_in):
@@ -14,6 +15,7 @@ class MainWindow:
 	def __init__(self):
 		self.root = Tk()
 		self.count = 0
+		self.func_loader = function_loader.FunctionLoader()
 
 		listbox = Listbox(self.root)
 		listbox.pack()
@@ -27,8 +29,9 @@ class MainWindow:
 	def hotkey_reaction(self, event):
 		result_str = ''
 		try:
-			geted_str  = self.root.clipboard_get()
-			result_str = string_function(geted_str)
+			geted_str  = self.root.clipboard_get()	
+			function = self.func_loader.find_command_by_key(event.char)
+			result_str = function(geted_str)
 			self.root.clipboard_clear()
 			self.root.clipboard_append(result_str)
 		except:

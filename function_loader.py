@@ -7,16 +7,14 @@ class Command:
 	def __init__(self, name, key, command):		
 		self.name = name
 		self.key = key
-		self.command = command
-		#self.command_func
+		self.function = command
 
 	def show(self):
-		print self.name + ' ' + self.key + ': ' + self.command
+		print self.name + ' ' + self.key + ': ' + self.command	
 
 # We use json to show what functions to use and from where
 # This class also store all modules what we already importe. This is needed cas in real
-# i don't really know what python gonna do if we import some module what we already import earlier
-# 	
+# i don't really know what python gonna do if we import some module what we already import earlier.
 class FunctionLoader:
 	def __init__(self):
 		self.all_commands = []
@@ -25,7 +23,7 @@ class FunctionLoader:
 			data = json.load(data_file)
 		for command in data["commands"]:
 			function_to_call = self.load_command(command["module"], command["command"])
-			tmp_cmd = Command(command["name"], command["key"], command["module"] + '->' + command["command"])
+			tmp_cmd = Command(command["name"], command["key"], function_to_call)
 			self.all_commands.append(tmp_cmd)
 
 	def find_module(self, module_name):
@@ -34,6 +32,12 @@ class FunctionLoader:
 				return module
 		return None
 
+	def find_command_by_key(self, key):
+		for command in self.all_commands:
+			if command.key == key:
+				return command.function
+		raise Exception('not found', key)
+
 	# There we need to load function from module and return this function
 	def load_command(self, module, command):
 		m = self.find_module(module)		
@@ -41,5 +45,3 @@ class FunctionLoader:
 			m = __import__(module)
 			self.addition_modules.append(m)
 		return getattr(m, command)
-
-fl = FunctionLoader()
