@@ -3,6 +3,7 @@
 
 import json
 from pprint import pprint
+import sys
 
 # One command. Hope we can use something like function pointer
 class Command:
@@ -18,10 +19,14 @@ class Command:
 # This class also store all modules what we already importe. This is needed cas in real
 # i don't really know what python gonna do if we import some module what we already import earlier.
 class FunctionLoader:
-	def __init__(self):
+	def __init__(self, module_path):
 		self.all_commands = []
 		self.addition_modules = []
-		with open('actions.json') as data_file:
+		self.modules_path = module_path
+
+		sys.path.append(self.modules_path) # Add path to all modules
+
+		with open(self.modules_path + 'actions.json') as data_file:
 			data = json.load(data_file)
 		for command in data["commands"]:
 			function_to_call = self.load_command(command["module"], command["command"])

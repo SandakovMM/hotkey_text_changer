@@ -3,13 +3,16 @@
 
 from Tkinter import *
 import function_loader
+import sys
 
 class MainWindow:
-	def __init__(self):
+	def __init__(self, modules_path):
 		self.root = Tk()
 		self.root.geometry("130x500+900+200")
 		self.count = 0
-		self.func_loader = function_loader.FunctionLoader()
+		self.modules_path = modules_path
+
+		self.func_loader = function_loader.FunctionLoader(self.modules_path)
 
 		# Add listbox for user. TODO: set size of listbox to fill full window
 		self.listbox = Listbox(self.root)
@@ -84,4 +87,8 @@ class Hint(Toplevel):
 			self.destroy()
 
 if __name__ == "__main__":
-	main = MainWindow()
+	if 1 == len(sys.argv):
+		main = MainWindow("")
+	else:
+		# we get path of json and modules as arguments, so use it
+		main = MainWindow(sys.argv[1])
