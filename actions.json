@@ -2,6 +2,7 @@
 	"commands": [
 		{ "name":"Add dots", "key":"q", "module":"string_changers", "command":"string_add_dots" },
 		{ "name":"From eng to rus", "key":"r", "module":"string_changers", "command":"string_from_eng_to_ru" },
-		{ "name":"From rus to eng", "key":"e", "module":"string_changers", "command":"string_from_ru_to_eng" }
+		{ "name":"From rus to eng", "key":"e", "module":"string_changers", "command":"string_from_ru_to_eng" },
+		{ "name":"Git get commits", "key":"g", "module":"git_string_changers", "command":"git_all_task_commits" }
 	]
 }
