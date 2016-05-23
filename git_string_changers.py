@@ -6,7 +6,7 @@ from subprocess import Popen, PIPE
 def git_all_task_commits(string_in):
 	task_number = string_in
 #'git log --all --grep="' + string_in + '" --pretty=format:"%ad:%an:%d:%B"' <-- if you want commits from all branches
-	command='git log --grep="' + string_in + '" --pretty=format:"%h:%B"'
+	command='git log --grep="' + string_in + '"'
 	proc = Popen(command, shell=True, stdout=PIPE, stderr=PIPE)
 	proc.wait()
 	res = proc.communicate()
