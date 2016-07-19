@@ -12,6 +12,9 @@ class Command:
 		self.key = key
 		self.function = command
 
+	def __call__(self, *args, **kwargs):
+		return self.function(*args, **kwargs)
+
 	def show(self):
 		print self.name + ' ' + self.key + ': ' + self.command	
 
@@ -27,7 +30,7 @@ class FunctionStorage(object):
 	def find_command_by_key(self, key):
 		for command in self.all_commands:
 			if command.key == key:
-				return command.function
+				return command
 		raise Exception('not found', key)
 
 	# This function used to return all commands visable data (names and keys)
