@@ -15,43 +15,20 @@ class Command:
 	def show(self):
 		print self.name + ' ' + self.key + ': ' + self.command	
 
-# We use json to show what functions to use and from where
-# This class also store all modules what we already importe. This is needed cas in real
-# i don't really know what python gonna do if we import some module what we already import earlier.
-class FunctionLoader:
-	def __init__(self, module_path):
+# This class filed functions over decorators. So we don't need to use any
+# json files, just say use function in module and go on.
+class FunctionStorage(object):
+	def __init__(self):
 		self.all_commands = []
-		self.addition_modules = []
-		self.modules_path = module_path
 
-		sys.path.append(self.modules_path) # Add path to all modules
-
-		with open(self.modules_path + 'actions.json') as data_file:
-			data = json.load(data_file)
-		for command in data["commands"]:
-			function_to_call = self.load_command(command["module"], command["command"])
-			tmp_cmd = Command(command["name"], command["key"], function_to_call)
-			self.all_commands.append(tmp_cmd)
-
-	def find_module(self, module_name):
-		for module in self.addition_modules:
-			if module.__name__ == module_name:
-				return module
-		return None
+	def add_command(self, name, key, command):
+		self.all_commands.append(Command(name, key, command))
 
 	def find_command_by_key(self, key):
 		for command in self.all_commands:
 			if command.key == key:
 				return command.function
 		raise Exception('not found', key)
-
-	# There we need to load function from module and return this function
-	def load_command(self, module, command):
-		m = self.find_module(module)		
-		if m == None:
-			m = __import__(module)
-			self.addition_modules.append(m)
-		return getattr(m, command)
 
 	# This function used to return all commands visable data (names and keys)
 	#  to show this data in our user intarface. Returns list of strings [name - key].
@@ -67,3 +44,35 @@ class FunctionLoader:
 		for command in self.all_commands:
 			result.append(command.key)
 		return result
+
+
+# We use json to show what functions to use and from where
+# This class also store all modules what we already importe. This is needed cas in real
+# i don't really know what python gonna do if we import some module what we already import earlier.
+class FunctionLoader(FunctionStorage):
+	def __init__(self, module_path):
+		super(FunctionLoader, self).__init__()
+		self.addition_modules = []
+		self.modules_path = module_path
+
+		sys.path.append(self.modules_path) # Add path to all modules
+
+		with open(self.modules_path + 'actions.json') as data_file:
+			data = json.load(data_file)
+		for command in data["commands"]:
+			function_to_call = self.load_command(command["module"], command["command"])
+			self.add_command(command["name"], command["key"], function_to_call)
+
+	def find_module(self, module_name):
+		for module in self.addition_modules:
+			if module.__name__ == module_name:
+				return module
+		return None
+
+	# There we need to load function from module and return this function
+	def load_command(self, module, command):
+		m = self.find_module(module)		
+		if m == None:
+			m = __import__(module)
+			self.addition_modules.append(m)
+		return getattr(m, command)
