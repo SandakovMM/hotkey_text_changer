@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from subprocess import Popen, PIPE
+from function_loader import register
 
 # Get all commits where commit message contains string in
+@register("Git get commits", "g")
 def git_all_task_commits(string_in):
 	task_number = string_in
 #'git log --all --grep="' + string_in + '" --pretty=format:"%ad:%an:%d:%B"' <-- if you want commits from all branches

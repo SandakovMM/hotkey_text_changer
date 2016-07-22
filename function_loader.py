@@ -21,8 +21,10 @@ class Command:
 # This class filed functions over decorators. So we don't need to use any
 # json files, just say use function in module and go on.
 class FunctionStorage(object):
+	command_list = []
+
 	def __init__(self):
-		self.all_commands = []
+		self.all_commands = FunctionStorage.command_list
 
 	def add_command(self, name, key, command):
 		self.all_commands.append(Command(name, key, command))
@@ -48,10 +50,19 @@ class FunctionStorage(object):
 			result.append(command.key)
 		return result
 
+def register(name, key):
+	def decorate(wrapped):
+		def _wrapper(*args, **kwargs):
+			return wrapped(*args, **kwargs)
+		FunctionStorage.command_list.append(Command(name, key, _wrapper))
+		return _wrapper
+	return decorate
 
 # We use json to show what functions to use and from where
 # This class also store all modules what we already importe. This is needed cas in real
 # i don't really know what python gonna do if we import some module what we already import earlier.
+# !!! Sine we going to use adding functions over register function as decoratore this class
+#   is going to be depricated. !!!
 class FunctionLoader(FunctionStorage):
 	def __init__(self, module_path):
 		super(FunctionLoader, self).__init__()

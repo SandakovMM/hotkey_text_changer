@@ -4,6 +4,7 @@
 from Tkinter import *
 import function_loader
 import sys
+from changers import *
 
 class MainWindow:
 	def __init__(self, modules_path):
@@ -12,7 +13,7 @@ class MainWindow:
 		self.count = 0
 		self.modules_path = modules_path
 
-		self.func_loader = function_loader.FunctionLoader(self.modules_path)
+		self.func_loader = function_loader.FunctionStorage()
 
 		# Add listbox for user. TODO: set size of listbox to fill full window
 		self.listbox = Listbox(self.root)
