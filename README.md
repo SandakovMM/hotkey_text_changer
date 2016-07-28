@@ -11,17 +11,29 @@ Find out that i can use linux console programm xsel in bash scripts. Just inform
 So this is it. Seems like pretty simple task. 
 Tell me if you have some questions or advice.
 
------------------------- Update ---------------------
-=D
+## How to use
 
-Seems like it's start to work like i want to. For description hotkeys and change functions you need
-to use action.json file. Structure ou this file is:
-name    - it's a name of fuction or description what this function do. Displayed at opened window.
-key     - it's a hotkey associated with function.
-module  - python module where store function code.
-command - function name in this module.
+Seems like it's start to work like i want to. For description hotkeys and change functions you can use two ways of work.
+* It's old version of configuration with action.json configs. You may find out how it's worked before commit ce676de. For use it you need to use action.json file. Structure ou this file is:
+| Attribute | Description |
+|-----------|:-----------:|
+| name      | it's a name of fuction or description what this function do. Displayed at opened window |
+| key       | it's a hotkey associated with function |
+| module    | python module where store function code |
+| command   | function name in this module |
 
 Module must be in same folder as a action.json file.
+
+* It's a new version of adding functions. I make it when i decided to try using python decorators. So sine using it you just need to add file with your actions to changers folder, add it to __init__.py in this folder and going to use @register decorator from function_loader.py on your function with arguments (description, key). Just like this:
+
+```python
+from function_loader import register
+
+@register("Desription", "k")
+def my_func(string_in)
+```
+
+Thats all, now you can use your function with key 'k' to change you string.
 
 How to use script:
 	You need to make command "python hotkey_text_changer.py" from and choose some option from opened
