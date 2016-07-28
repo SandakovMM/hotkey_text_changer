@@ -15,6 +15,7 @@ Tell me if you have some questions or advice.
 
 Seems like it's start to work like i want to. For description hotkeys and change functions you can use two ways of work.
 * It's old version of configuration with action.json configs. You may find out how it's worked before commit ce676de. For use it you need to use action.json file. Structure ou this file is:
+
 > name - it's a name of fuction or description what this function do. Displayed at opened window.
 > key - it's a hotkey associated with function.
 > module - python module where store function code.
