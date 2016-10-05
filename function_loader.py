@@ -38,17 +38,11 @@ class FunctionStorage(object):
 	# This function used to return all commands visable data (names and keys)
 	#  to show this data in our user intarface. Returns list of strings [name - key].
 	def get_commands_visable_data(self):
-		result = []
-		for command in self.all_commands:
-			result.append(command.name + ' - ' + command.key)
-		return result
+		return [command.name + ' - ' + command.key for command in self.all_commands]
 
 	# This function used to get all hotkeys, what we can use.
 	def get_all_hotkeys(self):
-		result = []
-		for command in self.all_commands:
-			result.append(command.key)
-		return result
+		return [command.key for command in self.all_commands]
 
 def register(name, key):
 	def decorate(wrapped):

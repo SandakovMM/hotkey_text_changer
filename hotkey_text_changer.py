@@ -18,12 +18,13 @@ class MainWindow:
 		# Add listbox for user. TODO: set size of listbox to fill full window
 		self.listbox = Listbox(self.root)
 		self.listbox.pack()
-		for data_string in self.func_loader.get_commands_visable_data():
-			self.listbox.insert(END, data_string)
+
+		[self.listbox.insert(END, data_string)
+			for data_string in self.func_loader.get_commands_visable_data()]
 
 		# init hotkeys
-		for key in self.func_loader.get_all_hotkeys():
-			self.root.bind_all("<" + key + ">", self.hotkey_reaction)
+		[self.root.bind_all("<" + key + ">", self.hotkey_reaction)
+			for key in self.func_loader.get_all_hotkeys()]
 
 		self.root.mainloop()
 
