@@ -21,34 +21,31 @@ class Command:
 # This class filed functions over decorators. So we don't need to use any
 # json files, just say use function in module and go on.
 class FunctionStorage(object):
-	command_list = []
+	command_list = {}
 
 	def __init__(self):
 		self.all_commands = FunctionStorage.command_list
 
 	def add_command(self, name, key, command):
-		self.all_commands.append(Command(name, key, command))
+		self.all_commands[key] = Command(name, key, command)
 
 	def find_command_by_key(self, key):
-		for command in self.all_commands:
-			if command.key == key:
-				return command
-		raise Exception('not found', key)
+		return self.all_commands[key]
 
 	# This function used to return all commands visable data (names and keys)
 	#  to show this data in our user intarface. Returns list of strings [name - key].
 	def get_commands_visable_data(self):
-		return [command.name + ' - ' + command.key for command in self.all_commands]
+		return map(lambda cmd: cmd.name + ' - ' + cmd.key, self.all_commands.values())
 
 	# This function used to get all hotkeys, what we can use.
 	def get_all_hotkeys(self):
-		return [command.key for command in self.all_commands]
+		return self.all_commands.keys()
 
 def register(name, key):
 	def decorate(wrapped):
 		def _wrapper(*args, **kwargs):
 			return wrapped(*args, **kwargs)
-		FunctionStorage.command_list.append(Command(name, key, _wrapper))
+		FunctionStorage.command_list[key] = Command(name, key, _wrapper)
 		return _wrapper
 	return decorate
 
