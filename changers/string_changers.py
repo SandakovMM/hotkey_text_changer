@@ -40,3 +40,22 @@ def string_from_ru_to_eng(string_in):
 		except: # this symbols not needed to change
 			result_string = result_string + char_in
 	return result_string
+
+@register("Ascii to string", "h")
+def acsii_to_string(string_in):
+	res = ''
+	symbols = string_in.split('.')
+	for symbol in symbols:
+		res = res + chr(int(symbol))
+	return res
+
+@register("String to ascii", "j")
+def string_to_acsii(string_in):
+	res = ''
+	for symbol in string_in:
+		res = res + str(ord(symbol)) + '.'
+	return res
+
+@register("Calc len", "l")
+def string_add_dots(string_in):
+	return str(len(string_in))
