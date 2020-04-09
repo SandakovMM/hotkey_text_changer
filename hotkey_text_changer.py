@@ -16,7 +16,7 @@ class MainWindow:
 		self.func_loader = function_loader.FunctionStorage()
 
 		# Add listbox for user. TODO: set size of listbox to fill full window
-		self.listbox = Listbox(self.root)
+		self.listbox = Listbox(self.root, width=900, height=900)
 		self.listbox.pack()
 
 		[self.listbox.insert(END, data_string)
