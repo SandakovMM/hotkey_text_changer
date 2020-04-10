@@ -1,19 +1,15 @@
-# hotkey_text_changer
+# Text changer project
 
-This python programm to make any changes with text on keystroke. 
-In my work i find out that sometimes i need to change some strings to another by a certain pattern. So now, i try to make programm to do that with just one or two keystroke.
+## hotkey_text_changer
 
-In my mind now it's must be like that:
-	We have some programm called with some hotkey in OS (or maybe it's always stay alive, don't really know whats best decision). We set mapping of keys and some functions worked with strings in addition modules attached with our programm. And after that we can use our hotkeys. Function get string from clipboard change it and insert result back to clipboard.
+This is a GUI version of python programm to make any changes with text on keystroke.
+When you call a script GUI with tips shows up and you can choose some of keystroke and
+change string what you copyed before from somewhere.
 
-Find out that i can use linux console programm xsel in bash scripts. Just information for me :)
+## How to add your own text changer
 
-So this is it. Seems like pretty simple task. 
-Tell me if you have some questions or advice.
-
-## How to use
-
-Seems like it's start to work like i want to. For description hotkeys and change functions you can use two ways of work.
+There is a folder named changers where you can add your own text changer module.
+For description hotkeys and change functions you can use two ways of work.
 * It's old version of configuration with action.json configs. You may find out how it's worked before commit ce676de. For use it you need to use action.json file. Structure ou this file is:
 
 > name - it's a name of fuction or description what this function do. Displayed at opened window.
@@ -32,7 +28,7 @@ from function_loader import register
 def my_func(string_in)
 ```
 
-Thats all, now you can use your function with key 'k' to change you string.
+That's all, now you can use your function with key 'k' to change you string.
 
 How to use script:
 	You need to make command "python hotkey_text_changer.py" from and choose some option from opened
@@ -41,3 +37,7 @@ How to use script:
 
 
 Thank you for attention and have a nice day!
+
+## cli_text_changer
+
+This is a cli version of programm. It's can be used to make changes faster if you know your keystrokes.
