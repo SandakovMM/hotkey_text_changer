@@ -16,7 +16,7 @@ class Command:
 		return self.function(*args, **kwargs)
 
 	def show(self):
-		print self.name + ' ' + self.key + ': ' + self.command	
+		print ("{} - {}".format(self.name, self.key))
 
 # This class filed functions over decorators. So we don't need to use any
 # json files, just say use function in module and go on.
